@@ -1,12 +1,23 @@
 "use client";
 import { useState } from "react";
-import HealthCentersMap from "./components/Healthcentersmap";
+// import HealthCentersMap from "./components/Healthcentersmap";
 import Navbar from "./components/Navbar";
 import FixedCompass from "./components/FixedCompass";
+import dynamic from "next/dynamic";
+
+const HealthCentersMap = dynamic(
+  () => import("./components/Healthcentersmap"),
+  { ssr: false }
+);
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("All");
   const [isOpen, setIsOpen] = useState(false);
+
+  if (typeof window === "undefined") {
+    // Client-side-only code
+    return <></>;
+  }
 
   return (
     <>

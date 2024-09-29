@@ -20,26 +20,6 @@ export interface HealthCenterSearchProps {
   isPublic: (params: string) => boolean;
 }
 
-const publicHealthIcon = L.icon({
-  iconUrl: Assets.greenIcon, // Path to your green icon
-  iconSize: [25, 41], // Adjust size if needed
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-  shadowSize: [41, 41],
-});
-
-const privateHealthIcon = L.icon({
-  iconUrl: Assets.redIcon, // Path to your red icon
-  iconSize: [25, 41], // Adjust size if needed
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-  shadowSize: [41, 41],
-});
-
 const HealthCenterSearch = ({
   data: healthCenters,
   filterQuery,
@@ -48,6 +28,26 @@ const HealthCenterSearch = ({
   isOpen,
   setIsOpen,
 }: HealthCenterSearchProps) => {
+  const publicHealthIcon = L.icon({
+    iconUrl: Assets.greenIcon, // Path to your green icon
+    iconSize: [25, 41], // Adjust size if needed
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    shadowSize: [41, 41],
+  });
+
+  const privateHealthIcon = L.icon({
+    iconUrl: Assets.redIcon, // Path to your red icon
+    iconSize: [25, 41], // Adjust size if needed
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    shadowSize: [41, 41],
+  });
+
   const map = useMap();
 
   const ownership = ["Private", "Public"];
@@ -163,7 +163,7 @@ const HealthCenterSearch = ({
         <button
           onClick={() => {
             setIsOpen(false);
-            ResetFilter()
+            ResetFilter();
           }}
           className="text-xl border px-3 py-1 rounded-full"
         >

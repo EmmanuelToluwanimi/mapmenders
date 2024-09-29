@@ -10,39 +10,6 @@ import MapLegend from "./Maplegend";
 import HealthCenterSearch from "./Actionscomponent";
 import PopupContent from "./Popup";
 
-// Default marker icon setup (Leaflet's default marker might not show in Next.js without this)
-const DefaultIcon = L.icon({
-  iconUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-  shadowSize: [41, 41],
-});
-L.Marker.prototype.options.icon = DefaultIcon;
-
-const publicHealthIcon = L.icon({
-  iconUrl: Assets.greenIcon, // Path to your green icon
-  iconSize: [25, 41], // Adjust size if needed
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-  shadowSize: [41, 41],
-});
-
-const privateHealthIcon = L.icon({
-  iconUrl: Assets.redIcon, // Path to your red icon
-  iconSize: [25, 41], // Adjust size if needed
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-  shadowSize: [41, 41],
-});
-
 interface HealthCentersMapProps {
   filter: string;
   isOpen: boolean;
@@ -54,6 +21,39 @@ const HealthCentersMap = ({
   isOpen,
   setIsOpen,
 }: HealthCentersMapProps) => {
+  // Default marker icon setup (Leaflet's default marker might not show in Next.js without this)
+  const DefaultIcon = L.icon({
+    iconUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    shadowSize: [41, 41],
+  });
+  L.Marker.prototype.options.icon = DefaultIcon;
+
+  const publicHealthIcon = L.icon({
+    iconUrl: Assets.greenIcon, // Path to your green icon
+    iconSize: [25, 41], // Adjust size if needed
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    shadowSize: [41, 41],
+  });
+
+  const privateHealthIcon = L.icon({
+    iconUrl: Assets.redIcon, // Path to your red icon
+    iconSize: [25, 41], // Adjust size if needed
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    shadowSize: [41, 41],
+  });
+
   // const position = [6.5244, 3.3792] as LatLngExpression;
   const position = [7.25, 5.1931] as LatLngExpression;
   const [healthCenters, setHealthCenters] = useState<HealthCenter[]>([]);
@@ -134,6 +134,11 @@ const HealthCentersMap = ({
   useEffect(() => {
     applyFilters();
   }, [filterQuery]);
+
+  if (typeof window === "undefined") {
+    // Client-side-only code
+    return <></>;
+  }
 
   return (
     <section className="h-screen">
