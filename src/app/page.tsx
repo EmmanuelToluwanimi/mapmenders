@@ -2,7 +2,6 @@
 import { useState } from "react";
 // import HealthCentersMap from "./components/Healthcentersmap";
 import Navbar from "./components/Navbar";
-import FixedCompass from "./components/FixedCompass";
 import dynamic from "next/dynamic";
 
 const HealthCentersMap = dynamic(
@@ -27,7 +26,6 @@ export default function Home() {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
-      <FixedCompass />
       <section>
         <HealthCentersMap
           filter={activeTab}

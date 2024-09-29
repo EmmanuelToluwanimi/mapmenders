@@ -5,10 +5,11 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L, { LatLngExpression } from "leaflet";
 import { HealthCenter } from "@/interface";
-import { Assets, selectedState } from "@/utils/constants";
+import { Assets, position, selectedState } from "@/utils/constants";
 import MapLegend from "./Maplegend";
 import HealthCenterSearch from "./Actionscomponent";
 import PopupContent from "./Popup";
+import FixedCompass from "./FixedCompass";
 
 interface HealthCentersMapProps {
   filter: string;
@@ -55,7 +56,6 @@ const HealthCentersMap = ({
   });
 
   // const position = [6.5244, 3.3792] as LatLngExpression;
-  const position = [7.25, 5.1931] as LatLngExpression;
   const [healthCenters, setHealthCenters] = useState<HealthCenter[]>([]);
   const [filteredData, setFilteredData] = useState<HealthCenter[]>([]);
   const [sortedData, setSortedData] = useState<HealthCenter[]>([]);
@@ -157,6 +157,7 @@ const HealthCentersMap = ({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
+        <FixedCompass />
         <MapLegend />
         {isOpen ? (
           <HealthCenterSearch

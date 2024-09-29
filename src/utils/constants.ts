@@ -1,3 +1,5 @@
+import { LatLngExpression } from "leaflet";
+
 export const Assets = {
   naijaFlagIcon: "/assets/flag.svg",
   greenIcon: "/assets/green.svg",
@@ -21,3 +23,4 @@ export const Colors = {
 };
 
 export const selectedState = "ondo";
+export const position = [7.25, 5.1931] as LatLngExpression;
