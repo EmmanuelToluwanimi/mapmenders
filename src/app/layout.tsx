@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Mapmembers",
-  description: "",
+  title: "Mapmenbers",
+  description: "A Digital Nigeria Innovation Challenge",
 };
 
 export default function RootLayout({
