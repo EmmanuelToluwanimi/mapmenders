@@ -16,6 +16,7 @@ const FixedCompass = () => {
       <div
         onClick={() => map.flyTo(position, 10)}
         className="p-4 bg-white rounded-lg shadow-lg"
+        role="button"
       >
         <Image src={Assets.arrowUp} alt="Compass Icon" width={30} height={30} />
       </div>
