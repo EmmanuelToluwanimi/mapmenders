@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L, { LatLngExpression } from "leaflet";
+import L from "leaflet";
 import { HealthCenter } from "@/interface";
 import { Assets, position, selectedState } from "@/utils/constants";
 import MapLegend from "./Maplegend";
 import HealthCenterSearch from "./Actionscomponent";
 import PopupContent from "./Popup";
 import FixedCompass from "./FixedCompass";
+import React from "react";
 
 interface HealthCentersMapProps {
   filter: string;
@@ -134,11 +135,6 @@ const HealthCentersMap = ({
   useEffect(() => {
     applyFilters();
   }, [filterQuery]);
-
-  if (typeof window === "undefined") {
-    // Client-side-only code
-    return <></>;
-  }
 
   return (
     <section className="h-screen">
