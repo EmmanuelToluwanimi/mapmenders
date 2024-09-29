@@ -3,6 +3,7 @@ import { useState } from "react";
 // import HealthCentersMap from "./components/Healthcentersmap";
 import Navbar from "./components/Navbar";
 import dynamic from "next/dynamic";
+import React from "react";
 
 const HealthCentersMap = dynamic(
   () => import("./components/Healthcentersmap"),
