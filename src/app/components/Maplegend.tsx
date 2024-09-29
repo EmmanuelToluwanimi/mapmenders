@@ -1,5 +1,6 @@
 "use client";
 import { Assets, selectedState } from "@/utils/constants";
+import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 import { useMap } from "react-leaflet";
@@ -18,11 +19,11 @@ function MapLegend() {
 
   return (
     <section
-      className=" ml-auto bg-transparent absolute bottom-28 right-10"
+      className=" ml-auto bg-transparent absolute bottom-20 right-10"
       style={{ zIndex: "1000" }}
     >
       <div className="flex gap-12 items-center justify-between">
-        <div className="bg-white min-w-[530px] p-6 rounded-lg text-sm border-b flex flex-col gap-3">
+        <div className="bg-white min-w-[530px] p-4 rounded-lg text-sm border-b flex flex-col gap-3">
           <div className={`flex justify-between items-center`}>
             <div>Map Legend</div>
             <div>
@@ -56,7 +57,7 @@ function MapLegend() {
                   </span>
                 </div>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-evenly">
                 <div className="flex gap-2">
                   <span className="text-gray-400">Coordinate System</span>
                   <span className="text-gray-800">GCS WGS 1984</span>
@@ -74,11 +75,11 @@ function MapLegend() {
               <div className="flex justify-evenly">
                 <div className="flex gap-2">
                   <span className="text-gray-400">Data sourced from:</span>
-                  <span className="text-blue-500">www.grid3.org</span>
+                  <Link href={"https://data.grid3.org/datasets/GRID3::grid3-nga-health-facilities-/about"} className="text-blue-500">www.grid3.org</Link>
                 </div>
                 <div className="flex gap-2">
                   <span className="text-gray-400">Icons from:</span>
-                  <span className="text-blue-500">iscons.app</span>
+                  <Link href={"https://www.isocons.app/"} className="text-blue-500">isocons.app</Link>
                 </div>
               </div>
             </>
@@ -87,7 +88,7 @@ function MapLegend() {
           )}
         </div>
 
-        <div className="bg-white rounded-lg px-3 py-6">
+        <div className="bg-white rounded-lg px-3 py-5">
           <div className="flex flex-col gap-6">
             <button
               onClick={handleZoomIn}

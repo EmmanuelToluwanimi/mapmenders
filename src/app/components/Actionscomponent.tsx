@@ -137,7 +137,7 @@ const HealthCenterSearch = ({
             : "bg-red-100 text-red-700"
         }"
       >
-        ${center.func_stats}
+        ${center.func_stats === "Unknown" ? "Non-Functional" : "Functional"}
       </span>
     </div>
   </div>
@@ -230,7 +230,7 @@ const HealthCenterSearch = ({
               {status.map((value, index) => {
                 return (
                   <option key={index} value={value}>
-                    {value}
+                    {value === "Unknown" ? "Non-Functional" : "Functional"}
                   </option>
                 );
               })}
@@ -339,7 +339,9 @@ const HealthCenterSearch = ({
                       : "bg-red-100 text-red-700"
                   }`}
                 >
-                  {center.func_stats}
+                  {center.func_stats === "Unknown"
+                    ? "Non-Functional"
+                    : "Functional"}
                 </span>
               </div>
 

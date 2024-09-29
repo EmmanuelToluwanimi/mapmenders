@@ -46,7 +46,7 @@ export default function PopupContent({ center, IsPublic }: PopupContentProps) {
               : "bg-red-100 text-red-700"
           }`}
         >
-          {center.func_stats}
+          {center.func_stats === "Unknown" ? "Non-Functional": "Functional"}
         </span>
       </div>
 
