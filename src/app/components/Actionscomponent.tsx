@@ -1,10 +1,9 @@
 "use client";
 import { HealthCenter } from "@/interface";
 import { Assets } from "@/utils/constants";
-import L, { Content, LatLngExpression, Popup } from "leaflet";
+import L, { LatLngExpression } from "leaflet";
 import { FormEvent, useState } from "react";
 import { useMap } from "react-leaflet";
-import PopupContent from "./Popup";
 export interface FilterQuery {
   category: string;
   type: string;

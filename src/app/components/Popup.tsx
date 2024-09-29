@@ -1,3 +1,4 @@
+"use client"
 import { HealthCenter } from "@/interface";
 import { Assets } from "@/utils/constants";
 import React from "react";

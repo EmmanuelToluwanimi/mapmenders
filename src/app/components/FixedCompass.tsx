@@ -1,4 +1,4 @@
-// components/FixedCompass.tsx
+"use client"
 import { Assets } from "@/utils/constants";
 import Image from "next/image";
 
