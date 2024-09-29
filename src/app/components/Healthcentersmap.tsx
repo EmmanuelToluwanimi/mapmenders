@@ -7,6 +7,8 @@ import L, { LatLngExpression } from "leaflet";
 import { HealthCenter } from "@/interface";
 import { Assets, selectedState } from "@/utils/constants";
 import MapLegend from "./Maplegend";
+import HealthCenterSearch from "./Actionscomponent";
+import PopupContent from "./Popup";
 
 // Default marker icon setup (Leaflet's default marker might not show in Next.js without this)
 const DefaultIcon = L.icon({
@@ -43,19 +45,26 @@ const privateHealthIcon = L.icon({
 
 interface HealthCentersMapProps {
   filter: string;
+  isOpen: boolean;
+  setIsOpen: (value: boolean) => void;
 }
 
-const HealthCentersMap = ({ filter: ownership }: HealthCentersMapProps) => {
+const HealthCentersMap = ({
+  filter: ownership,
+  isOpen,
+  setIsOpen,
+}: HealthCentersMapProps) => {
   // const position = [6.5244, 3.3792] as LatLngExpression;
   const position = [7.25, 5.1931] as LatLngExpression;
   const [healthCenters, setHealthCenters] = useState<HealthCenter[]>([]);
   const [filteredData, setFilteredData] = useState<HealthCenter[]>([]);
   const [sortedData, setSortedData] = useState<HealthCenter[]>([]);
-  const [searchValue, setSearchValue] = useState("");
-  const [filtertQuery, setFiltertQuery] = useState({
+  // const [searchValue, setSearchValue] = useState("");
+  const [filterQuery, setFilterQuery] = useState({
     category: "",
     type: "",
     status: "",
+    searchTerm: "",
     ownership,
   });
 
@@ -67,10 +76,10 @@ const HealthCentersMap = ({ filter: ownership }: HealthCentersMapProps) => {
   }
 
   function HandleFilter() {
-    if (ownership === "private") {
+    if (ownership === "Private") {
       const newData = healthCenters.filter((arg) => !IsPublic(arg.ownership));
       setFilteredData(newData);
-    } else if (ownership === "public") {
+    } else if (ownership === "Public") {
       const newData = healthCenters.filter((arg) => IsPublic(arg.ownership));
       setFilteredData(newData);
     } else {
@@ -82,11 +91,49 @@ const HealthCentersMap = ({ filter: ownership }: HealthCentersMapProps) => {
     return params !== "Others" && params !== "Private";
   }
 
+  const applyFilters = () => {
+    if (
+      !filterQuery.category &&
+      !filterQuery.status &&
+      !filterQuery.type &&
+      !filterQuery.searchTerm &&
+      filterQuery.ownership === "All"
+    ) {
+      setSortedData([]);
+      return;
+    }
+    const data = [...healthCenters];
+    const filtered = data.filter((center) => {
+      return (
+        (filterQuery.searchTerm === "" ||
+          center.prmry_name
+            .toLowerCase()
+            .includes(filterQuery.searchTerm.toLowerCase()) ||
+          center.lgacode
+            .toLowerCase()
+            .includes(filterQuery.searchTerm.toLowerCase())) &&
+        (filterQuery.ownership === "All" ||
+          (filterQuery.ownership === "Public" && IsPublic(center.ownership)) ||
+          (filterQuery.ownership === "Private" &&
+            !IsPublic(center.ownership))) &&
+        (filterQuery.category === "" ||
+          filterQuery.category === center.category) &&
+        (filterQuery.type === "" || filterQuery.type === center.type) &&
+        (filterQuery.status === "" || filterQuery.status === center.func_stats)
+      );
+    });
+    setSortedData(filtered);
+  };
+
   useEffect(() => {
     HandleFilter();
     if (healthCenters.length) return;
     GetLocations();
   }, [ownership, healthCenters]);
+
+  useEffect(() => {
+    applyFilters();
+  }, [filterQuery]);
 
   return (
     <section className="h-screen">
@@ -95,6 +142,7 @@ const HealthCentersMap = ({ filter: ownership }: HealthCentersMapProps) => {
         zoom={10}
         className="h-full w-full"
         zoomControl={false}
+        scrollWheelZoom={false}
         // scrollWheelZoom={true}
         // center={[7.1, 5.1]}
         // zoom={9}
@@ -105,6 +153,18 @@ const HealthCentersMap = ({ filter: ownership }: HealthCentersMapProps) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         <MapLegend />
+        {isOpen ? (
+          <HealthCenterSearch
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            isPublic={IsPublic}
+            data={sortedData}
+            filterQuery={filterQuery}
+            setFilterQuery={(e) => setFilterQuery(e)}
+          />
+        ) : (
+          <></>
+        )}
 
         {filteredData.map((center) => {
           const icon = IsPublic(center.ownership)
@@ -117,14 +177,7 @@ const HealthCentersMap = ({ filter: ownership }: HealthCentersMapProps) => {
               icon={icon}
             >
               <Popup>
-                <strong>{center.prmry_name}</strong>
-                <br />
-                <em>
-                  {center.wardname}, {center.lganame} LGA
-                </em>
-                <br />
-                <p>{center.category}</p>
-                <p>Status: {center.func_stats}</p>
+                <PopupContent IsPublic={IsPublic} center={center} />
               </Popup>
             </Marker>
           );

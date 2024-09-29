@@ -1,5 +1,5 @@
 "use client";
-import { Assets, Colors, selectedState } from "@/utils/constants";
+import { Assets, selectedState } from "@/utils/constants";
 import { useState } from "react";
 import { useMap } from "react-leaflet";
 
@@ -90,13 +90,13 @@ function MapLegend() {
           <div className="flex flex-col gap-6">
             <button
               onClick={handleZoomIn}
-              className={`text-white flex justify-center items-center h-10 w-10 rounded-lg bg-[${Colors.primary}]`}
+              className={`text-white flex justify-center items-center h-10 w-10 rounded-lg bg-blue-500`}
             >
               <img src={Assets.plusIcon} alt="icon" />
             </button>
             <button
               onClick={handleZoomOut}
-              className={`text-white flex justify-center items-center h-10 w-10 rounded-lg bg-[${Colors.primary}]`}
+              className={`text-white flex justify-center items-center h-10 w-10 rounded-lg bg-blue-500`}
             >
               <img src={Assets.minusIcon} alt="icon" />
             </button>

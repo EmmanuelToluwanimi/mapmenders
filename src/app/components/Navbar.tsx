@@ -4,9 +4,13 @@ import { Assets, selectedState } from "@/utils/constants";
 export default function Navbar({
   tab: activeTab,
   setActiveTab,
+  setIsOpen,
+  isOpen,
 }: {
   tab: string;
+  isOpen: boolean;
   setActiveTab: (params: string) => void;
+  setIsOpen: (params: boolean) => void;
 }) {
   // const [activeTab, setActiveTab] = useState("All");
 
@@ -14,7 +18,10 @@ export default function Navbar({
     <nav className="flex justify-between items-center py-4 px-6 bg-white shadow-md">
       {/* Left Section: Icon and Title */}
       <div className="flex items-center">
-        <button className="p-2 rounded-md bg-blue-50 text-blue-500">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="p-2 rounded-md bg-blue-50 text-blue-500"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -57,7 +64,7 @@ export default function Navbar({
           Healthcare Facilities map for:
         </span>
         <div className="flex items-center space-x-2 bg-gray-100 rounded-full p-1">
-          {["all", "public", "private"].map((tab) => (
+          {["All", "Public", "Private"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
