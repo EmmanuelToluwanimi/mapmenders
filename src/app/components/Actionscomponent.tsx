@@ -17,6 +17,7 @@ export interface HealthCenterSearchProps {
   data: HealthCenter[];
   filterQuery: FilterQuery;
   setIsOpen: (value: boolean) => void;
+  ClearFilter: (value: boolean) => void;
   setFilterQuery: (params: FilterQuery) => void;
   isPublic: (params: string) => boolean;
 }
@@ -81,6 +82,7 @@ const HealthCenterSearch = ({
 
   function PanToLocation(params: LatLngExpression) {
     map.flyTo(params, 14);
+    // ClearFilter()
     return;
   }
 
@@ -183,7 +185,7 @@ const HealthCenterSearch = ({
             </div>
             <input
               type="search"
-              placeholder="Search by name or LGA..."
+              placeholder="Search by name, LGA or state..."
               minLength={3}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
