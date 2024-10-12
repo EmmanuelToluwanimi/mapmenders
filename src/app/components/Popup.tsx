@@ -23,7 +23,7 @@ export default function PopupContent({ center, IsPublic }: PopupContentProps) {
       <div className="flex gap-2 items-center">
         <img src={Assets.markerIcon} alt="location" />
         <div className="text-xs text-gray-600">
-          {center.wardname}, {center.lganame} LGA
+          {center.lganame} LGA, {center.statename}
         </div>
       </div>
       <div className="flex gap-2 items-center">

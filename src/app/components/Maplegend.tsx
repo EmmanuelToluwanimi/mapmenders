@@ -1,11 +1,11 @@
 "use client";
-import { Assets, selectedState } from "@/utils/constants";
+import { Assets } from "@/utils/constants";
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 import { useMap } from "react-leaflet";
 
-function MapLegend() {
+function MapLegend({ statename }: { statename: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const map = useMap();
 
@@ -50,16 +50,18 @@ function MapLegend() {
                   <img src={Assets.green2Icon} alt="" />
                   <span className="text-gray-400">Public Health Facility</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <img src={Assets.markerIcon} alt="" />
-                  <span className="text-gray-400 capitalize font-semibold">
-                    {selectedState} State
-                  </span>
-                </div>
+                {statename && (
+                  <div className="flex items-center gap-2">
+                    <img src={Assets.markerIcon} alt="" />
+                    <span className="text-gray-400 capitalize font-semibold">
+                      {statename} State
+                    </span>
+                  </div>
+                )}
               </div>
               <div className="flex justify-evenly">
                 <div className="flex gap-2">
-                  <span className="text-gray-400">Coordinate System</span>
+                  <span className="text-gray-400">Coordinate System:</span>
                   <span className="text-gray-800">GCS WGS 1984</span>
                 </div>
                 {/* <div className="flex gap-2">
@@ -67,7 +69,7 @@ function MapLegend() {
                   <span className="text-gray-800">WGS 1984</span>
                 </div> */}
                 <div className="flex gap-2">
-                  <span className="text-gray-400">Units</span>
+                  <span className="text-gray-400">Units:</span>
                   <span className="text-gray-800">Degree</span>
                 </div>
               </div>
@@ -75,11 +77,23 @@ function MapLegend() {
               <div className="flex justify-evenly">
                 <div className="flex gap-2">
                   <span className="text-gray-400">Data sourced from:</span>
-                  <Link href={"https://data.grid3.org/datasets/GRID3::grid3-nga-health-facilities-/about"} className="text-blue-500">www.grid3.org</Link>
+                  <Link
+                    href={
+                      "https://data.grid3.org/datasets/GRID3::grid3-nga-health-facilities-/about"
+                    }
+                    className="text-blue-500"
+                  >
+                    www.grid3.org
+                  </Link>
                 </div>
                 <div className="flex gap-2">
                   <span className="text-gray-400">Icons from:</span>
-                  <Link href={"https://www.isocons.app/"} className="text-blue-500">isocons.app</Link>
+                  <Link
+                    href={"https://www.isocons.app/"}
+                    className="text-blue-500"
+                  >
+                    isocons.app
+                  </Link>
                 </div>
               </div>
             </>
