@@ -1,5 +1,6 @@
 "use client";
-import { Assets, selectedState } from "@/utils/constants";
+import { Assets } from "@/utils/constants";
+import Link from "next/link";
 
 export default function Navbar({
   tab: activeTab,
@@ -15,7 +16,10 @@ export default function Navbar({
   // const [activeTab, setActiveTab] = useState("All");
 
   return (
-    <nav className="flex justify-between items-center py-4 px-6 bg-white shadow-md">
+    <nav
+      className="flex justify-between items-center py-4 px-6 bg-white shadow-md sticky top-0 left-0"
+      style={{ zIndex: 1000 }}
+    >
       {/* Left Section: Icon and Title */}
       <div className="flex items-center">
         <button
@@ -36,6 +40,7 @@ export default function Navbar({
               d="M4 6h16M4 12h16m-7 6h7"
             />
           </svg>
+          {/* <abbr className="text-xs">Menu</abbr> */}
         </button>
         <div className="ml-4 flex items-center">
           <svg
@@ -57,6 +62,13 @@ export default function Navbar({
           </h1>
         </div>
       </div>
+
+      <Link
+        href={"/story"}
+        className="px-4 py-1 border border-blue-500 rounded-3xl text-blue-500"
+      >
+        Our story
+      </Link>
 
       {/* Center Section: Tabs */}
       <div className="flex items-center">
@@ -83,7 +95,7 @@ export default function Navbar({
         <div className="rounded-full w-6 h-6 mr-2">
           <img src={Assets.naijaFlagIcon} alt="Nigeria flag" />
         </div>
-        <span className="text-gray-700 capitalize">{selectedState} State</span>
+        <span className="text-gray-700 capitalize">Nigeria</span>
       </div>
     </nav>
   );
