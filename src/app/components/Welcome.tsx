@@ -22,6 +22,11 @@ const MapmendersOverlay = ({ onClose }: { onClose: () => void }) => {
           Welcome to Mapmenders
         </h2>
 
+        {/* Title */}
+        <h2 className="text-sm font-semibold text-blue-500 mb-6 text-center">
+          A Quick Tutorial
+        </h2>
+
         <div className="text-sm">
           {/* Mapmenders box */}
           <div className=" flex items-center mb-6">
