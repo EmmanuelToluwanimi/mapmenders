@@ -19,7 +19,7 @@ export const Assets = {
   red2Icon: "/assets/red2.svg",
   green2Icon: "/assets/green2.svg",
   heatmap: "/assets/heatmap.png",
-  welcome: "/assets/welcome.png",
+  welcome: "/assets/welcome2.png",
 };
 
 export const Colors = {

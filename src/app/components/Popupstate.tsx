@@ -65,7 +65,7 @@ export default function PopupContentState({
         className="flex items-center justify-center gap-2 p-2 bg-blue-500 text-white rounded-lg text-sm hover:bg-blue-600"
       >
         <img src={Assets.mapIcon} alt="map" />
-        <span>View Health Centers</span>
+        <span>View Health Facilities</span>
       </button>
     </div>
   );
