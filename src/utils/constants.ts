@@ -15,9 +15,11 @@ export const Assets = {
   minusIcon: "/assets/minus.svg",
   mapIcon: "/assets/map.svg",
   closeIcon: "/assets/close.svg",
+  resetIcon: "/assets/reseticon.svg",
   red2Icon: "/assets/red2.svg",
   green2Icon: "/assets/green2.svg",
   heatmap: "/assets/heatmap.png",
+  welcome: "/assets/welcome.png",
 };
 
 export const Colors = {

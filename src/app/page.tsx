@@ -4,6 +4,7 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import dynamic from "next/dynamic";
 import React from "react";
+import MapmendersOverlay from "./components/Welcome";
 
 // const HealthCentersMap = dynamic(
 //   () => import("./components/Healthcentersmap"),
@@ -17,6 +18,7 @@ const NigeriaHealthCentersMap = dynamic(
 export default function Home() {
   const [activeTab, setActiveTab] = useState("All");
   const [isOpen, setIsOpen] = useState(false);
+  const [overlay, setOverlay] = useState(!false);
 
   if (typeof window === "undefined") {
     // Client-side-only code
@@ -25,6 +27,7 @@ export default function Home() {
 
   return (
     <>
+      {overlay && <MapmendersOverlay onClose={() => setOverlay(!overlay)} />}
       <Navbar
         tab={activeTab}
         setActiveTab={setActiveTab}
