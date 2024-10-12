@@ -30,7 +30,7 @@ const MapmendersOverlay = ({ onClose }: { onClose: () => void }) => {
 
           {/* Instructions */}
           <p className="text-gray-600 mb-4">
-            Click on "Our Story" to see more information about healthcare
+            Click on &ldquo;Our Story&ldquo; to see more information about healthcare
             infrastructural across Nigeria and places of need
           </p>
 
@@ -50,7 +50,7 @@ const MapmendersOverlay = ({ onClose }: { onClose: () => void }) => {
               </div>
               <p className="text-gray-600">
                 This map uses cluster representation for each state. Click on
-                "view health centers" in to a particular state to show various
+                &ldquo;view health centers&ldquo; in to a particular state to show various
                 healthcare facilities points
               </p>
             </li>
