@@ -5,8 +5,12 @@ import Navbar from "./components/Navbar";
 import dynamic from "next/dynamic";
 import React from "react";
 
-const HealthCentersMap = dynamic(
-  () => import("./components/Healthcentersmap"),
+// const HealthCentersMap = dynamic(
+//   () => import("./components/Healthcentersmap"),
+//   { ssr: false }
+// );
+const NigeriaHealthCentersMap = dynamic(
+  () => import("./components/Nigeriahealthmap"),
   { ssr: false }
 );
 
@@ -28,7 +32,12 @@ export default function Home() {
         setIsOpen={setIsOpen}
       />
       <section>
-        <HealthCentersMap
+        {/* <HealthCentersMap
+          filter={activeTab}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        /> */}
+        <NigeriaHealthCentersMap
           filter={activeTab}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
